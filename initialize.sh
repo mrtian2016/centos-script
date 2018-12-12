@@ -21,6 +21,7 @@ touch $log_file
 echo "Installing third-party sources..."
 yum -y install epel-release >> initialize-script.log
 
+
 #安装yum-axelge,安装软件时可以并行下载
 echo "Installing yum-axelget..."
 yum -y install yum-axelget >> initialize-script.log
@@ -43,7 +44,6 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 echo "Writing some alias..."
 echo "alias vi=vim" >> ~/.zshrc
 echo -e "alias reload=\"source ~/.zshrc && echo '>> OH MY, ZSH configurations are reloaded! '\"" >> ~/.zshrc
-# 更改语言
-echo -e "LANG=\"en_US.UTF-8\"" > /etc/default/local
+
 echo "Complete !!! Have Fun !!!"
 
