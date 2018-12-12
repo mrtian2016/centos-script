@@ -8,7 +8,7 @@ fi
 # 切换到用户目录
 cd ~
 
-log_file=initialize-script.log
+log_file="initialize-script.log"
 
 if [ -f "./${log_file}" ]; then
  echo "Warning: You have already run this script"
