@@ -7,12 +7,13 @@ fi
 
 # 切换到用户目录
 cd ~
-touch initialize-script.log
+
 log_file=initialize-script.log
 if [ -f "${log_file}" ];then
  echo "Warning: You have already run this script"
  exit 1
 fi
+touch $log_file
 
 # 安装第三方源
 echo "Installing third-party sources..."
