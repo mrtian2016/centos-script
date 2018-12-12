@@ -45,6 +45,5 @@ echo "Writing some alias..."
 echo "alias vi=vim" >> ~/.zshrc
 echo -e "alias reload=\"source ~/.zshrc && echo '>> OH MY, ZSH configurations are reloaded! '\"" >> ~/.zshrc
 echo "Complete !!! Have Fun !!!"
-zsh
-reload
+source ~/.zshrc
 
