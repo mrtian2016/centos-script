@@ -11,8 +11,8 @@ cd ~
 log_file="initialize-script-log"
 
 if [ -f "./${log_file}" ]; then
- echo "Warning: You have already run this script"
- exit 1
+    echo "Warning: You have already run this script"
+    exit 1
 fi
 
 touch $log_file
