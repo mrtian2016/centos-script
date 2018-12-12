@@ -9,7 +9,7 @@ fi
 cd ~
 touch initialize-script.log
 log_file=initialize-script.log
-if [ -f $log_file ];then
+if [ -f "${log_file}" ];then
  echo "Warning: You have already run this script"
  exit 1
 fi
