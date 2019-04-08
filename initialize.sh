@@ -72,7 +72,7 @@ yum -y install zsh wget screen git vim htop net-tools | tee $log_file
 
 # 切换 shell
 chsh -s /bin/zsh
-zsh
+
 # 安装 Oh-My-Zsh
 echo "Installing Oh-My-Zsh..."
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh | tee $log_file
