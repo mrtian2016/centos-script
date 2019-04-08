@@ -30,8 +30,10 @@ done
 install_lnmp=false
 if [ $lnmp ] ; then
     case $lnmp in
-        lnmp|lnmpa|lamp|nginx|db|mphp) install_lnmp=true;;
-        *) echo "lnmp 参数错误"; break;;
+        lnmp|lnmpa|lamp|nginx|db|mphp)
+            install_lnmp=true;;
+        *)
+            echo "lnmp 参数错误"; break;;
     esac
 fi
 
@@ -78,26 +80,26 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 
 # 一些alias
 echo "Writing some alias..."
-echo "alias vi=vim" | tee ~/.zshrc
-echo -e "alias reload=\"source ~/.zshrc && echo '| tee OH MY, ZSH configurations are reloaded! '\"" | tee ~/.zshrc
+echo "alias vi=vim" >> ~/.zshrc
+echo -e "alias reload=\"source ~/.zshrc && echo '| tee OH MY, ZSH configurations are reloaded! '\"" >> ~/.zshrc
 echo "Complete !!! Have Fun !!!"
 source ~/.zshrc
 
-if [ !$selinux ] ; then
+if [ "$selinux" = false ] ; then
     # 关闭SELinux
     echo "关闭SELinux"
     setenforce 0
     sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 fi
 
-if [ !$firewalld ] ; then
+if [ "$firewalld" = false ] ; then
     # 关闭防火墙
     echo "关闭防火墙"
     systemctl stop firewalld.service
     systemctl disable firewalld.service
 fi
 
-if [ $install_lnmp ]; then
+if [ "$install_lnmp" = true ]; then
     echo "安装$lnmp"
     wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp
 fi
