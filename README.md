@@ -10,4 +10,4 @@
 	 
 例如仅安装NGINX并关闭selinux和防火墙的命令为:
 
- ```curl -o- -L -s https://raw.githubusercontent.com/mrtian2016/centos-script/master/initialize.sh | sudo bash /dev/stdin -l false -f false -s false```
+ ```curl -o- -L -s https://raw.githubusercontent.com/mrtian2016/centos-script/master/initialize.sh | sudo bash /dev/stdin -l nginx -f false -s false```
