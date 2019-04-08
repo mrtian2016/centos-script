@@ -31,7 +31,7 @@ yum -y update >> $log_file
 
 # 安装 zsh wget screen git
 echo "Installing zsh wget screen git..."
-yum -y install zsh wget screen git vim htop>> $log_file
+yum -y install zsh wget screen git vim htop net-tools >> $log_file
 
 # 切换 shell
 chsh -s /bin/zsh
