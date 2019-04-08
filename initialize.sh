@@ -28,14 +28,15 @@ do
         esac
 done
 install_lnmp=false
-echo $lnmp;
+
 case "$lnmp" in
     lnmp|lnmpa|lamp|nginx|db|mphp)
          install_lnmp=true;;
      *)
         echo "lnmp 参数错误"; break;;
 esac
-
+echo "lnmp: $lnmp , firewalld: $firewalld , selinux: $selinux $install_lnmp"
+exit 0
 
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
