@@ -74,6 +74,7 @@ if [ $lnmp ] ; then
     case $lnmp in 
         lnmp|lnmpa|lamp|nginx|db|mphp) wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp;;
         *) echo "lnmp 参数错误"; break;;
+    esac
 fi
 
 if [ !$selinux ] ; then
