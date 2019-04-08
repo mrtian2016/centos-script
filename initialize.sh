@@ -40,11 +40,20 @@ chsh -s /bin/zsh
 echo "Installing Oh-My-Zsh..."
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh >> $log_file
 
+# 关闭SELinux
+setenforce 0
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+
+# 关闭防火墙
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+
 # 一些alias
 echo "Writing some alias..."
 echo "alias vi=vim" >> ~/.zshrc
 echo -e "alias reload=\"source ~/.zshrc && echo '>> OH MY, ZSH configurations are reloaded! '\"" >> ~/.zshrc
 echo "Complete !!! Have Fun !!!"
-zsh
 source ~/.zshrc
+
+zsh
 
