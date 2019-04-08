@@ -33,7 +33,7 @@ if [ "$lnmp" != false ]; then
         lnmp|lnmpa|lamp|nginx|db|mphp)
            install_lnmp=true;;
          *)
-           echo "lnmp 参数错误";;
+           echo "lnmp 参数错误";exit 0;;
     esac
 fi
 # 检查是否为root用户
