@@ -36,7 +36,6 @@ case "$lnmp" in
         echo "lnmp 参数错误"; break;;
 esac
 
-
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
     echo "Error: You must be root to run this script, please use root to install software"
