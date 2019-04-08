@@ -1,4 +1,34 @@
 #!/bin/bash
+
+show_usage="args: [-l , -f , -s ]\
+                                  [--lnmp=, --firewalld=, --selinux=]"
+
+
+# lnmp 默认不安装 参数可以为 lnmp|lnmpa|lamp|nginx|db|mphp 
+lnmp=false
+
+# 防火墙默认关闭
+firewalld=false
+
+# SELinux默认关闭
+selinux=false
+
+GETOPT_ARGS=`getopt -a -o l:f:s: -l lnmp:,firewalld:,selinux: -- "$@"`
+eval set -- $GETOPT_ARGS
+
+#获取参数
+while [ -n "$1" ]
+do
+        case "$1" in
+                -l|--lnmp) lnmp=$2; shift 2;;
+                -f|--firewalld) firewalld=$2; shift 2;;
+                -s|--selinux) selinux=$2; shift 2;;
+                --) break ;;
+                *) echo $1,$2,$show_usage; break ;;
+        esac
+done
+
+
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
     echo "Error: You must be root to run this script, please use root to install software"
@@ -40,13 +70,26 @@ chsh -s /bin/zsh
 echo "Installing Oh-My-Zsh..."
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh >> $log_file
 
-# 关闭SELinux
-setenforce 0
-sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+if [ $lnmp ] ; then
+    case $lnmp in 
+        lnmp|lnmpa|lamp|nginx|db|mphp) wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp;;
+        *) echo "lnmp 参数错误"; break;;
+fi
 
-# 关闭防火墙
-systemctl stop firewalld.service
-systemctl disable firewalld.service
+if [ !$selinux ] ; then
+    # 关闭SELinux
+    echo "关闭SELinux"
+    setenforce 0
+    sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+fi
+
+if [ !$firewalld ] ; then
+    # 关闭防火墙
+    echo "关闭防火墙"
+    systemctl stop firewalld.service
+    systemctl disable firewalld.service
+fi
+
 
 # 一些alias
 echo "Writing some alias..."
