@@ -28,14 +28,14 @@ do
         esac
 done
 install_lnmp=false
-
-case "$lnmp" in
-    lnmp|lnmpa|lamp|nginx|db|mphp)
-         install_lnmp=true;;
-     *)
-        echo "lnmp 参数错误"; break;;
-esac
-
+if [ "$lnmp" != false ]; then
+    case "$lnmp" in
+        lnmp|lnmpa|lamp|nginx|db|mphp)
+             install_lnmp=true;;
+         *)
+            echo "lnmp 参数错误"; break;;
+    esac
+fi
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
     echo "Error: You must be root to run this script, please use root to install software"
