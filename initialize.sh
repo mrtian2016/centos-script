@@ -28,7 +28,7 @@ do
         esac
 done
 install_lnmp=false
-
+echo $lnmp;
 case "$lnmp" in
     lnmp|lnmpa|lamp|nginx|db|mphp)
          install_lnmp=true;;
