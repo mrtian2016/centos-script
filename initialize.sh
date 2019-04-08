@@ -31,9 +31,9 @@ install_lnmp=false
 if [ "$lnmp" != false ]; then
     case "$lnmp" in
         lnmp|lnmpa|lamp|nginx|db|mphp)
-             install_lnmp=true;;
+           install_lnmp=true;;
          *)
-            echo "lnmp 参数错误"; break;;
+           echo "lnmp 参数错误";;
     esac
 fi
 # 检查是否为root用户
