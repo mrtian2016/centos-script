@@ -24,10 +24,16 @@ do
                 -f|--firewalld) firewalld=$2; shift 2;;
                 -s|--selinux) selinux=$2; shift 2;;
                 --) break ;;
-                *) echo $1,$2,$show_usage; break ;;
+                *) echo $1,$2,$show_usage; exit 0 ;;
         esac
 done
-
+install_lnmp=false
+if [ $lnmp ] ; then
+    case $lnmp in
+        lnmp|lnmpa|lamp|nginx|db|mphp) install_lnmp=true;;
+        *) echo "lnmp 参数错误"; break;;
+    esac
+fi
 
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
@@ -96,9 +102,8 @@ source ~/.zshrc
 
 zsh
 
-if [ $lnmp ] ; then
-    case $lnmp in
-        lnmp|lnmpa|lamp|nginx|db|mphp) wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp;;
-        *) echo "lnmp 参数错误"; break;;
-    esac
+if [ $install_lnmp ]; then
+    echo "安装$lnmp"
+    wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp
 fi
+
