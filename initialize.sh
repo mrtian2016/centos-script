@@ -71,12 +71,17 @@ yum -y install zsh wget screen git vim htop net-tools | tee $log_file
 
 # 切换 shell
 chsh -s /bin/zsh
-
+zsh
 # 安装 Oh-My-Zsh
 echo "Installing Oh-My-Zsh..."
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh | tee $log_file
 
-
+# 一些alias
+echo "Writing some alias..."
+echo "alias vi=vim" | tee ~/.zshrc
+echo -e "alias reload=\"source ~/.zshrc && echo '| tee OH MY, ZSH configurations are reloaded! '\"" | tee ~/.zshrc
+echo "Complete !!! Have Fun !!!"
+source ~/.zshrc
 
 if [ !$selinux ] ; then
     # 关闭SELinux
@@ -91,15 +96,6 @@ if [ !$firewalld ] ; then
     systemctl stop firewalld.service
     systemctl disable firewalld.service
 fi
-
-
-# 一些alias
-echo "Writing some alias..."
-echo "alias vi=vim" | tee ~/.zshrc
-echo -e "alias reload=\"source ~/.zshrc && echo '| tee OH MY, ZSH configurations are reloaded! '\"" | tee ~/.zshrc
-echo "Complete !!! Have Fun !!!"
-source ~/.zshrc
-
 
 if [ $install_lnmp ]; then
     echo "安装$lnmp"
