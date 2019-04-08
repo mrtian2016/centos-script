@@ -55,26 +55,26 @@ touch $log_file
 
 # 安装第三方源
 echo "Installing third-party sources..."
-yum -y install epel-release >> $log_file
+yum -y install epel-release | tee $log_file
 
 
 #安装yum-axelge,安装软件时可以并行下载
 echo "Installing yum-axelget..."
-yum -y install yum-axelget >> $log_file
+yum -y install yum-axelget | tee $log_file
 
 # 更新软件
-yum -y update >> $log_file
+yum -y update | tee $log_file
 
 # 安装 zsh wget screen git
 echo "Installing zsh wget screen git..."
-yum -y install zsh wget screen git vim htop net-tools >> $log_file
+yum -y install zsh wget screen git vim htop net-tools | tee $log_file
 
 # 切换 shell
 chsh -s /bin/zsh
 
 # 安装 Oh-My-Zsh
 echo "Installing Oh-My-Zsh..."
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh >> $log_file
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh | tee $log_file
 
 
 
@@ -95,12 +95,11 @@ fi
 
 # 一些alias
 echo "Writing some alias..."
-echo "alias vi=vim" >> ~/.zshrc
-echo -e "alias reload=\"source ~/.zshrc && echo '>> OH MY, ZSH configurations are reloaded! '\"" >> ~/.zshrc
+echo "alias vi=vim" | tee ~/.zshrc
+echo -e "alias reload=\"source ~/.zshrc && echo '| tee OH MY, ZSH configurations are reloaded! '\"" | tee ~/.zshrc
 echo "Complete !!! Have Fun !!!"
 source ~/.zshrc
 
-zsh
 
 if [ $install_lnmp ]; then
     echo "安装$lnmp"
