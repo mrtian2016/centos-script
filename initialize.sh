@@ -70,12 +70,7 @@ chsh -s /bin/zsh
 echo "Installing Oh-My-Zsh..."
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh >> $log_file
 
-if [ $lnmp ] ; then
-    case $lnmp in 
-        lnmp|lnmpa|lamp|nginx|db|mphp) wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp;;
-        *) echo "lnmp 参数错误"; break;;
-    esac
-fi
+
 
 if [ !$selinux ] ; then
     # 关闭SELinux
@@ -101,3 +96,9 @@ source ~/.zshrc
 
 zsh
 
+if [ $lnmp ] ; then
+    case $lnmp in
+        lnmp|lnmpa|lamp|nginx|db|mphp) wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp;;
+        *) echo "lnmp 参数错误"; break;;
+    esac
+fi
