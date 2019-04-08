@@ -35,8 +35,7 @@ case "$lnmp" in
      *)
         echo "lnmp 参数错误"; break;;
 esac
-echo "lnmp: $lnmp , firewalld: $firewalld , selinux: $selinux $install_lnmp"
-exit 0
+
 
 # 检查是否为root用户
 if [ $(id -u) != "0" ]; then
@@ -102,6 +101,6 @@ fi
 
 if [ "$install_lnmp" = true ]; then
     echo "安装$lnmp"
-    wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh $lnmp
+    wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && ./install.sh "$lnmp"
 fi
 
